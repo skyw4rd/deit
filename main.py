@@ -206,8 +206,8 @@ def main(args):
 
     cudnn.benchmark = True
 
-    dataset_train, args.nb_classes = build_dataset(is_train=True, args=args)
-    dataset_val, _ = build_dataset(is_train=False, args=args)
+    dataset_train, args.nb_classes = build_dataset(args=args)
+    dataset_val, _ = build_dataset(args=args)
 
     if args.distributed:
         num_tasks = utils.get_world_size()
