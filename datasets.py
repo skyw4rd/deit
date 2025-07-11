@@ -53,12 +53,12 @@ class INatDataset(ImageFolder):
     # __getitem__ and __len__ inherited from ImageFolder
 
 
-def build_dataset(args):
+def build_dataset(is_train, args):
     # transform = build_transform(is_train, args)
     transform = transforms.Compose([
         transforms.Resize([224, 224]),
         transforms.ToTensor(),
     ])
-
-    train_dataset = datasets.ImageFolder(args.data_path, transform=transform)
-    return train_dataset, 1000
+    root = os.path.join(args.data_path, 'train' if is_train else 'val')
+    dataset = datasets.ImageFolder(root, transform=transform)
+    return dataset, 1000
